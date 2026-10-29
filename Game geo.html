@@ -1,0 +1,1167 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jelajah Nusantara | Flora & Fauna</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --green: #a8e6a1;
+  --lime: #d6f5a7;
+  --dark: #102c24;
+  --glass: rgba(255,255,255,.085);
+  --border: rgba(255,255,255,.13);
+  --muted: #b4c9bd;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #f4fff5;
+  font-family: 'Nunito', sans-serif;
+  background:
+    radial-gradient(ellipse at 10% 10%, #245c43 0, transparent 40%),
+    radial-gradient(ellipse at 90% 75%, #244b38 0, transparent 40%),
+    linear-gradient(135deg, #0b1f1a, #123c2d 55%, #10261e);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .14;
+  background-image: radial-gradient(#d6f5a7 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+button { font: inherit; }
+
+button:focus-visible {
+  outline: 3px solid #d6f5a7;
+  outline-offset: 4px;
+}
+
+button:disabled { cursor: default; }
+
+.app {
+  width: min(1120px, 92%);
+  margin: auto;
+  padding: 24px 0 48px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 52px;
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-weight: 900;
+  letter-spacing: -.5px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: var(--lime);
+  color: var(--dark);
+  font-size: 24px;
+  box-shadow: 0 0 25px #b6ef8a22;
+}
+
+.brand small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sound-btn, .ghost-btn {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.sound-btn:hover, .ghost-btn:hover {
+  background: #ffffff20;
+  transform: translateY(-2px);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 34px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--lime);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-size: clamp(40px, 6vw, 70px);
+  line-height: 1.03;
+  letter-spacing: -3px;
+  margin: 0 0 20px;
+}
+
+h1 span {
+  color: var(--lime);
+  display: block;
+}
+
+.hero p {
+  max-width: 500px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.primary-btn {
+  border: 0;
+  padding: 15px 23px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #d8f6a5, #a5e8a2);
+  color: #173624;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 28px #a8e6a125;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px #a8e6a140;
+}
+
+.hero-art {
+  min-height: 330px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+}
+
+.orbit {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border: 1px solid #d6f5a72b;
+  border-radius: 50%;
+  animation: rotate 24s linear infinite;
+}
+
+.orbit::before, .orbit::after {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  background: var(--lime);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--lime);
+}
+
+.orbit::before { top: 24px; left: 45px; }
+.orbit::after { bottom: 40px; right: 22px; }
+
+@keyframes rotate { to { transform: rotate(360deg); } }
+
+.animal-art {
+  font-size: clamp(120px, 19vw, 190px);
+  filter: drop-shadow(0 25px 35px #0006);
+  animation: float 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+.art-label {
+  position: absolute;
+  bottom: 7px;
+  padding: 10px 17px;
+  background: #ffffff12;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  backdrop-filter: blur(12px);
+  font-size: 12px;
+  color: var(--lime);
+  z-index: 2;
+}
+
+.panel {
+  background: linear-gradient(135deg, #ffffff0d, #ffffff05);
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  padding: 25px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 70px #00000015;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.section-heading h2 { margin: 0; font-size: 20px; }
+.section-heading p { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+
+.pill {
+  font-size: 11px;
+  color: var(--lime);
+  background: #c9f69b13;
+  border: 1px solid #c9f69b2b;
+  padding: 7px 11px;
+  border-radius: 30px;
+  white-space: nowrap;
+}
+
+.island-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.island {
+  min-height: 130px;
+  border-radius: 19px;
+  border: 1px solid var(--border);
+  background: #ffffff06;
+  color: white;
+  padding: 17px 8px;
+  cursor: pointer;
+  transition: .22s;
+}
+
+.island:hover {
+  transform: translateY(-5px);
+  border-color: #d6f5a780;
+  background: #d6f5a710;
+}
+
+.island.selected {
+  border-color: var(--lime);
+  background: #d6f5a718;
+  box-shadow: inset 0 0 0 1px #d6f5a733;
+}
+
+.island .emoji { display: block; font-size: 35px; margin-bottom: 10px; }
+.island strong { display: block; font-size: 14px; }
+.island small { color: var(--muted); font-size: 11px; }
+
+.mode-row {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.mode {
+  padding: 10px 17px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  color: #d6e4da;
+  background: #ffffff06;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.mode.active {
+  color: var(--dark);
+  background: var(--lime);
+  border-color: var(--lime);
+  font-weight: 900;
+}
+
+.start-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.hint { color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  padding: 15px;
+  border: 1px solid var(--border);
+  background: #ffffff08;
+  border-radius: 17px;
+}
+
+.stat-label { color: var(--muted); font-size: 12px; }
+.stat-value { font-size: 25px; font-weight: 900; margin-top: 3px; }
+.stat-value small { font-size: 13px; color: var(--lime); }
+
+#game { display: none; }
+#result { display: none; }
+
+.game-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.progress-track {
+  height: 8px;
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #ffffff14;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #a2e99c, #e2f8a5);
+  border-radius: inherit;
+  transition: width .4s;
+}
+
+.question-card { padding: clamp(18px, 4vw, 32px); }
+
+.question-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.question-emoji {
+  min-height: 125px;
+  display: grid;
+  place-items: center;
+  font-size: 85px;
+  background: radial-gradient(ellipse, #a8e6a11a, transparent 68%);
+  margin-bottom: 14px;
+}
+
+.question-text {
+  font-size: clamp(20px, 3vw, 27px);
+  line-height: 1.4;
+  margin: 0 0 23px;
+  text-align: center;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.answer {
+  padding: 15px;
+  min-height: 64px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff07;
+  border: 1px solid var(--border);
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.answer:hover:not(:disabled) {
+  background: #d6f5a712;
+  border-color: #d6f5a780;
+  transform: translateY(-2px);
+}
+
+.answer-letter {
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #ffffff12;
+  font-weight: 900;
+  color: var(--lime);
+}
+
+.answer.correct {
+  border-color: #6ee7a0;
+  background: #38c77b20;
+}
+
+.answer.wrong {
+  border-color: #ff8585;
+  background: #ff55551b;
+}
+
+.answer:disabled { cursor: default; }
+
+.feedback {
+  display: none;
+  margin-top: 17px;
+  padding: 17px;
+  border-radius: 15px;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.feedback.show { display: block; animation: appear .3s ease; }
+.feedback.good { background: #42d38a15; border: 1px solid #42d38a55; }
+.feedback.bad { background: #ff747415; border: 1px solid #ff747455; }
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback-title { font-weight: 900; margin-bottom: 4px; }
+.feedback-text { color: #d6e7da; }
+
+.feedback-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+#nextBtn { display: none; }
+
+.result-box { text-align: center; padding: 40px 20px; }
+.result-emoji { font-size: 85px; }
+.result-box h2 { font-size: 34px; margin: 10px 0; }
+.result-box p { color: var(--muted); line-height: 1.7; }
+
+.result-score {
+  font-size: 52px;
+  font-weight: 900;
+  color: var(--lime);
+  margin: 12px 0;
+}
+
+.result-stats {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+}
+
+.result-chip {
+  padding: 12px 18px;
+  border: 1px solid var(--border);
+  background: #ffffff08;
+  border-radius: 14px;
+}
+
+.footer {
+  
+  text-align: center;
+  color: #a3baaa;
+  font-size: 12px;
+  margin-top: 35px;
+  line-height: 1.8;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  background: #d6f5a7;
+  color: #173624;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-weight: 900;
+  box-shadow: 0 10px 35px #0004;
+  transition: .25s;
+  z-index: 10;
+}
+
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+.hidden { display: none !important; }
+
+@media (max-width: 720px) {
+  .navbar { margin-bottom: 25px; }
+  .hero { grid-template-columns: 1fr; gap: 0; }
+  .hero-art { min-height: 225px; }
+  .animal-art { font-size: 125px; }
+  .orbit { width: 195px; height: 195px; }
+  h1 { letter-spacing: -2px; }
+  .island-grid { grid-template-columns: repeat(2, 1fr); }
+  .island { min-height: 115px; }
+  .answers { grid-template-columns: 1fr; }
+  .panel { padding: 18px; }
+  .stat { padding: 11px; }
+  .stat-value { font-size: 21px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <nav class="navbar">
+    <div class="brand">
+      <div class="brand-icon">🌿</div>
+      <div>
+        JELAJAH NUSANTARA
+        <small>Nature discovery game</small>
+      </div>
+    </div>
+    <button class="sound-btn" id="soundBtn" aria-pressed="true">
+      🔊 Suara ON
+    </button>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div>
+      <div class="eyebrow">✦ PETUALANGAN ALAM INDONESIA</div>
+      <h1>Kenali Alam.<span>Jaga Nusantara.</span></h1>
+      <p>
+        Jelajahi kekayaan flora dan fauna Indonesia, temukan fakta unik,
+        jawab tantangan, dan jadilah Penjaga Nusantara!
+      </p>
+      <button class="primary-btn" id="exploreBtn">
+        Mulai Petualangan ↗
+      </button>
+    </div>
+    <div class="hero-art">
+      <div class="orbit"></div>
+      <div class="animal-art" id="heroEmoji">🐅</div>
+      <div class="art-label">🌱 SURGA BIODIVERSITAS DUNIA</div>
+    </div>
+  </section>
+
+  <section class="panel" id="setup">
+    <div class="section-heading">
+      <div>
+        <h2>🧭 Pilih Wilayah Jelajah</h2>
+        <p>Setiap pulau menyimpan keunikan alamnya sendiri.</p>
+      </div>
+      <span class="pill">4 WILAYAH</span>
+    </div>
+
+    <div class="island-grid" id="islandGrid">
+      <button class="island selected" data-island="all">
+        <span class="emoji">🇮🇩</span>
+        <strong>Seluruh Indonesia</strong>
+        <small>Semua wilayah</small>
+      </button>
+      <button class="island" data-island="Sumatra">
+        <span class="emoji">🐘</span>
+        <strong>Sumatra</strong>
+        <small>Hutan tropis</small>
+      </button>
+      <button class="island" data-island="Jawa">
+        <span class="emoji">🌺</span>
+        <strong>Jawa</strong>
+        <small>Flora endemik</small>
+      </button>
+      <button class="island" data-island="Kalimantan">
+        <span class="emoji">🦧</span>
+        <strong>Kalimantan</strong>
+        <small>Hutan hujan</small>
+      </button>
+      <button class="island" data-island="Papua">
+        <span class="emoji">🦜</span>
+        <strong>Papua</strong>
+        <small>Fauna eksotis</small>
+      </button>
+      <button class="island" data-island="Bali & Nusa Tenggara">
+        <span class="emoji">🦎</span>
+        <strong>Bali & Nusa Tenggara</strong>
+        <small>Sabana dan pulau</small>
+      </button>
+      <button class="island" data-island="Sulawesi">
+        <span class="emoji">🦌</span>
+        <strong>Sulawesi</strong>
+        <small>Satwa unik</small>
+      </button>
+      <button class="island" data-island="Maluku">
+        <span class="emoji">🌳</span>
+        <strong>Maluku</strong>
+        <small>Rempah Nusantara</small>
+      </button>
+    </div>
+
+    <div class="section-heading" style="margin-top:28px">
+      <div>
+        <h2>🎯 Pilih Tantangan</h2>
+        <p>Sesuaikan petualangan dengan gaya bermainmu.</p>
+      </div>
+    </div>
+
+    <div class="mode-row" id="modeRow">
+      <button class="mode active" data-mode="all">🌏 Campuran</button>
+      <button class="mode" data-mode="fauna">🐾 Fauna</button>
+      <button class="mode" data-mode="flora">🌿 Flora</button>
+    </div>
+
+    <div class="start-row">
+      <div class="hint">
+        ⭐ 10 soal per sesi<br>
+        ❤️ 3 nyawa · 🏆 XP dan skor tertinggi tersimpan
+      </div>
+      <button class="primary-btn" id="startBtn">Mulai Bermain →</button>
+    </div>
+  </section>
+
+  <section id="game">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">🏆 SKOR</div>
+        <div class="stat-value" id="score">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">❤️ NYAWA</div>
+        <div class="stat-value" id="lives">❤️❤️❤️</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">🔥 COMBO</div>
+        <div class="stat-value"><span id="streak">0</span><small>×</small></div>
+      </div>
+    </div>
+
+    <div class="game-top">
+      <button class="ghost-btn" id="quitBtn">← Keluar</button>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress"></div>
+      </div>
+      <span class="pill" id="questionCount">1/10</span>
+    </div>
+
+    <div class="panel question-card">
+      <div class="question-meta">
+        <span class="pill" id="category">🐾 FAUNA</span>
+        <span id="region">📍 Sumatra</span>
+      </div>
+      <div class="question-emoji" id="questionEmoji">🐅</div>
+      <h2 class="question-text" id="questionText">Pertanyaan muncul di sini.</h2>
+      <div class="answers" id="answers"></div>
+
+      <div class="feedback" id="feedback" aria-live="polite">
+        <div class="feedback-title" id="feedbackTitle"></div>
+        <div class="feedback-text" id="feedbackText"></div>
+        <div class="feedback-footer">
+          <span id="pointsEarned"></span>
+          <button class="primary-btn" id="nextBtn">Lanjut →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel result-box" id="result">
+    <div class="result-emoji" id="resultEmoji">🏆</div>
+    <h2 id="resultTitle">Penjaga Nusantara!</h2>
+    <p id="resultMessage"></p>
+    <div class="result-score" id="finalScore">0</div>
+    <div style="color:var(--muted)">TOTAL SKOR</div>
+    <div class="result-stats">
+      <div class="result-chip">✅ Benar: <strong id="correctCount">0</strong></div>
+      <div class="result-chip">⭐ XP: <strong id="xpCount">0</strong></div>
+      <div class="result-chip">🥇 Rekor: <strong id="bestScore">0</strong></div>
+    </div>
+    <button class="primary-btn" id="replayBtn">Main Lagi ↻</button>
+    <button class="ghost-btn" id="homeBtn" style="margin-left:8px">Beranda</button>
+  </section>
+
+  <footer class="footer">
+    🌱 BELAJAR · BERMAIN · LESTARIKAN<br>
+    Mengenal kekayaan hayati Indonesia adalah langkah awal menjaganya.
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const questions = [
+  {
+    type:"fauna", region:"Sumatra", emoji:"🐅",
+    q:"Harimau Sumatra merupakan satwa endemik yang berasal dari pulau...",
+    a:["Jawa","Sumatra","Sulawesi","Papua"], correct:1,
+    fact:"Harimau Sumatra adalah subspesies harimau yang masih hidup di Sumatra. Habitatnya terancam oleh kerusakan hutan dan perburuan."
+  },
+  {
+    type:"flora", region:"Sumatra",
+    emoji:"🌺", q:"Bunga raksasa Rafflesia arnoldii terkenal karena...",
+    a:["Menghasilkan buah terbesar","Memiliki bunga berukuran sangat besar","Bisa hidup di laut","Berwarna biru terang"], correct:1,
+    fact:"Rafflesia arnoldii memiliki bunga yang sangat besar dan mengeluarkan bau menyerupai bangkai untuk menarik lalat penyerbuk."
+  },
+  {
+    type:"fauna", region:"Kalimantan",
+    emoji:"🦧", q:"Orangutan Kalimantan menghabiskan banyak waktunya untuk...",
+    a:["Berenang di laut","Hidup di padang es","Beraktivitas di pepohonan","Menggali gua"], correct:2,
+    fact:"Orangutan merupakan primata arboreal yang banyak beraktivitas di pohon. Mereka membantu penyebaran biji di hutan."
+  },
+  {
+    type:"flora", region:"Kalimantan",
+    emoji:"🌳", q:"Pohon ulin dikenal sebagai kayu yang...",
+    a:["Sangat lunak","Mudah larut dalam air","Kuat dan tahan lama","Hanya tumbuh di gurun"], correct:2,
+    fact:"Ulin atau kayu besi merupakan pohon asli Kalimantan yang terkenal kuat. Kelestariannya perlu dijaga karena pertumbuhannya lambat."
+  },
+  {
+    type:"fauna", region:"Papua",
+    emoji:"🦜", q:"Burung cenderawasih dikenal luas karena...",
+    a:["Bulu dan tarian kawinnya yang indah","Tidak memiliki sayap","Hidup di bawah laut","Berukuran sebesar gajah"], correct:0,
+    fact:"Berbagai jenis cenderawasih hidup di Papua dan pulau-pulau sekitarnya. Bulu hias dan perilaku kawinnya sangat khas."
+  },
+  {
+    type:"flora", region:"Papua",
+    emoji:"🌴", q:"Sagu merupakan tumbuhan yang batangnya dapat dimanfaatkan sebagai sumber...",
+    a:["Bahan bakar nuklir","Tepung pangan","Batu permata","Logam"], correct:1,
+    fact:"Pati dari batang sagu diolah menjadi tepung dan menjadi sumber pangan penting bagi sebagian masyarakat Indonesia timur."
+  },
+  {
+    type:"fauna", region:"Jawa",
+    emoji:"🦏", q:"Badak Jawa yang sangat langka saat ini bertahan hidup di...",
+    a:["Taman Nasional Ujung Kulon","Danau Toba","Taman Nasional Bunaken","Kepulauan Banda"], correct:0,
+    fact:"Taman Nasional Ujung Kulon di Banten merupakan habitat terakhir badak Jawa. Perlindungan habitat sangat penting untuk kelangsungan hidupnya."
+  },
+  {
+    type:"flora", region:"Jawa",
+    emoji:"🌲", q:"Pohon rasamala dapat ditemukan di hutan pegunungan. Pohon ini termasuk kelompok...",
+    a:["Mamalia","Ikan","Tumbuhan berkayu","Serangga"], correct:2,
+    fact:"Rasamala (Altingia excelsa) merupakan pohon hutan yang dapat tumbuh tinggi dan dijumpai di sejumlah hutan pegunungan Indonesia."
+  },
+  {
+    type:"fauna", region:"Sulawesi",
+    emoji:"🦌", q:"Anoa adalah satwa khas Sulawesi yang masih satu kelompok dengan...",
+    a:["Kura-kura","Kerbau","Burung elang","Kelelawar"], correct:1,
+    fact:"Anoa merupakan kerabat sapi dan kerbau berukuran relatif kecil. Satwa ini menghadapi ancaman akibat perburuan dan kehilangan habitat."
+  },
+  {
+    type:"flora", region:"Sulawesi",
+    emoji:"🌿", q:"Cengkih banyak dibudidayakan di Indonesia karena kuncup bunganya digunakan sebagai...",
+    a:["Bumbu dan rempah","Bahan kaca","Pakan paus","Batu bangunan"], correct:0,
+    fact:"Cengkih merupakan rempah aromatik yang telah lama menjadi bagian penting perdagangan dan kuliner Indonesia."
+  },
+  {
+    type:"fauna", region:"Bali & Nusa Tenggara",
+    emoji:"🦎", q:"Komodo hidup secara alami di wilayah...",
+    a:["Kepulauan Raja Ampat saja","Taman Nasional Komodo dan pulau sekitarnya","Pegunungan Himalaya","Kalimantan bagian utara saja"], correct:1,
+    fact:"Komodo berasal dari sejumlah pulau di Nusa Tenggara Timur, termasuk Komodo, Rinca, Gili Motang, dan sebagian wilayah Flores."
+  },
+  {
+    type:"flora", region:"Bali & Nusa Tenggara",
+    emoji:"🌵", q:"Tumbuhan yang memiliki adaptasi menyimpan air sangat berguna di wilayah...",
+    a:["Gurun es","Daerah kering","Dasar laut","Puncak bersalju"], correct:1,
+    fact:"Di sebagian wilayah kering Nusa Tenggara, tumbuhan dengan adaptasi menghadapi keterbatasan air memiliki keunggulan untuk bertahan."
+  },
+  {
+    type:"fauna", region:"Maluku",
+    emoji:"🦜", q:"Kakatua Maluku dikenal dengan jambulnya yang mencolok. Burung ini termasuk kelompok...",
+    a:["Reptil","Mamalia","Burung","Amfibi"], correct:2,
+    fact:"Kakatua Maluku atau kakatua seram (Cacatua moluccensis) berasal dari Pulau Seram. Perdagangan satwa ilegal merupakan salah satu ancamannya."
+  },
+  {
+    type:"flora", region:"Maluku",
+    emoji:"🌰", q:"Pala secara historis sangat penting bagi Kepulauan Banda. Bagian yang umum digunakan sebagai rempah adalah...",
+    a:["Biji dan selaput bijinya","Akar yang menjadi logam","Batu dari batang","Cangkang hewan"], correct:0,
+    fact:"Biji pala dan selaput merah yang menyelimutinya, disebut fuli, digunakan sebagai rempah bernilai ekonomi."
+  },
+  {
+    type:"fauna", region:"Sumatra", emoji:"🐘",
+    q:"Gajah Sumatra menggunakan belalainya untuk melakukan banyak hal. Salah satunya adalah...",
+    a:["Mengambil makanan","Bernapas tanpa paru-paru","Menghasilkan listrik","Mengubah warna kulit"], correct:0,
+    fact:"Belalai gajah digunakan untuk mengambil makanan dan air, mencium bau, berkomunikasi, serta membantu berbagai aktivitas sehari-hari."
+  },
+  {
+    type:"flora", region:"Sumatra", emoji:"🌴",
+    q:"Kelapa sawit merupakan tumbuhan yang menghasilkan...",
+    a:["Minyak dari buahnya","Bulu untuk terbang","Susu hewan","Mutiara"], correct:0,
+    fact:"Minyak kelapa sawit diolah dari bagian buahnya dan digunakan dalam berbagai produk. Perkebunannya perlu dikelola dengan memperhatikan hutan dan keanekaragaman hayati."
+  },
+  {
+    type:"fauna", region:"Kalimantan", emoji:"🐻",
+    q:"Beruang madu memiliki lidah yang panjang dan membantu mendapatkan makanan seperti...",
+    a:["Nektar dan serangga","Batu dan pasir","Es laut","Rumput laut saja"], correct:0,
+    fact:"Beruang madu memakan beragam makanan, termasuk serangga, madu, buah, dan bagian tumbuhan. Ia membantu ekosistem hutan melalui aktivitas mencari makan."
+  },
+  {
+    type:"flora", region:"Kalimantan", emoji:"🌱",
+    q:"Mengapa hutan hujan tropis penting bagi keanekaragaman hayati?",
+    a:["Tidak menyediakan tempat hidup","Menyediakan habitat bagi banyak spesies","Menghilangkan semua sumber air","Hanya bisa ditinggali satu jenis hewan"], correct:1,
+    fact:"Hutan menyediakan makanan, tempat berlindung, lokasi berkembang biak, dan hubungan ekologis bagi beragam spesies."
+  },
+  {
+    type:"fauna", region:"Papua", emoji:"🐦",
+    q:"Burung kasuari memiliki peran ekologis yang penting, salah satunya...",
+    a:["Membantu menyebarkan biji","Membuat karang laut","Menghasilkan minyak bumi","Membekukan sungai"], correct:0,
+    fact:"Kasuari memakan berbagai buah dan membantu menyebarkan biji sejumlah tumbuhan hutan melalui kotorannya."
+  },
+  {
+    type:"flora", region:"Papua", emoji:"🌿",
+    q:"Apa tindakan yang tepat untuk membantu menjaga flora endemik?",
+    a:["Mengambil semua tumbuhan dari hutan","Membeli tanaman hasil pengambilan ilegal","Melindungi habitat dan tidak merusak tumbuhan","Membakar lahan sembarangan"], correct:2,
+    fact:"Pelestarian habitat, penanaman yang bertanggung jawab, dan tidak mengambil tumbuhan liar secara ilegal membantu menjaga flora endemik."
+  },
+  {
+    type:"fauna", region:"Jawa", emoji:"🐒",
+    q:"Owa Jawa merupakan primata yang hidup alami terutama di...",
+    a:["Hutan Jawa","Kutub Utara","Laut Banda","Gurun Sahara"], correct:0,
+    fact:"Owa Jawa merupakan primata endemik Jawa yang bergantung pada hutan. Fragmentasi hutan menjadi salah satu ancaman bagi populasinya."
+  },
+  {
+    type:"flora", region:"Jawa", emoji:"🌸",
+    q:"Anggrek merupakan kelompok tumbuhan yang terkenal karena...",
+    a:["Memiliki bunga dengan bentuk beragam","Selalu hidup di air laut","Tidak memiliki akar","Merupakan jenis burung"], correct:0,
+    fact:"Indonesia memiliki beragam anggrek, termasuk jenis endemik. Kehilangan habitat dan pengambilan liar dapat mengancam spesies tertentu."
+  },
+  {
+    type:"fauna", region:"Sulawesi", emoji:"🐗",
+    q:"Babirusa memiliki ciri khas berupa...",
+    a:["Tanduk dari es","Taring yang melengkung","Sayap yang lebar","Sirip punggung"], correct:1,
+    fact:"Babirusa merupakan mamalia khas Sulawesi dan pulau-pulau di sekitarnya. Bentuk taringnya yang khas menjadi salah satu ciri pengenal."
+  },
+  {
+    type:"flora", region:"Sulawesi", emoji:"🌴",
+    q:"Langkah yang paling baik untuk menjaga tumbuhan asli suatu daerah adalah...",
+    a:["Menghancurkan habitatnya","Menanam spesies invasif sembarangan","Melindungi habitat alaminya","Membuang sampah ke hutan"], correct:2,
+    fact:"Perlindungan habitat alami membantu tumbuhan asli bertahan sekaligus mempertahankan hubungan ekologis dengan hewan penyerbuk dan penyebar biji."
+  },
+  {
+    type:"fauna", region:"Bali & Nusa Tenggara", emoji:"🐦",
+    q:"Jalak Bali merupakan burung langka yang berasal dari...",
+    a:["Pulau Bali","Pulau Sumatra","Pulau Halmahera","Pulau Kalimantan"], correct:0,
+    fact:"Jalak Bali merupakan burung endemik Bali. Upaya konservasi mencakup perlindungan habitat dan program penangkaran yang terkelola."
+  },
+  {
+    type:"flora", region:"Bali & Nusa Tenggara", emoji:"🌳",
+    q:"Hutan mangrove membantu wilayah pesisir dengan cara...",
+    a:["Mempercepat abrasi","Menjadi habitat biota dan membantu melindungi pantai","Menghilangkan semua ikan","Mengubah air laut menjadi tawar seluruhnya"], correct:1,
+    fact:"Mangrove menyediakan habitat dan tempat asuhan bagi berbagai biota serta dapat membantu mengurangi energi gelombang dan erosi pesisir."
+  },
+  {
+    type:"fauna", region:"Maluku", emoji:"🦋",
+    q:"Mengapa satwa endemik pulau perlu mendapat perhatian khusus?",
+    a:["Karena selalu hidup di seluruh dunia","Karena wilayah hidupnya terbatas dan bisa rentan","Karena tidak membutuhkan habitat","Karena semuanya merupakan hewan peliharaan"], correct:1,
+    fact:"Spesies dengan wilayah sebaran terbatas dapat lebih rentan terhadap perubahan habitat, bencana, spesies invasif, dan perburuan."
+  },
+  {
+    type:"flora", region:"Maluku", emoji:"🌳",
+    q:"Keanekaragaman hayati berarti...",
+    a:["Keberagaman makhluk hidup dan ekosistem","Jumlah gedung dalam kota","Hanya jumlah pohon besar","Kumpulan benda buatan manusia"], correct:0,
+    fact:"Keanekaragaman hayati mencakup variasi gen, spesies, dan ekosistem. Menjaganya berarti menjaga keseimbangan kehidupan."
+  }
+];
+
+const $ = id => document.getElementById(id);
+
+let selectedIsland = "all";
+let selectedMode = "all";
+let round = [];
+let current = 0;
+let score = 0;
+let lives = 3;
+let streak = 0;
+let correctTotal = 0;
+let xp = 0;
+let answered = false;
+let soundOn = true;
+let audioCtx = null;
+let bestScore = 0;
+
+try {
+  bestScore = Number(localStorage.getItem("jelajahBest") || 0);
+} catch (_) {}
+
+const shuffle = arr => {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+};
+
+function playTone(frequency, duration = .12, type = "sine") {
+  if (!soundOn) return;
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.value = frequency;
+    gain.gain.setValueAtTime(.07, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch (_) {}
+}
+
+function toast(message) {
+  $("toast").textContent = message;
+  $("toast").classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => $("toast").classList.remove("show"), 1800);
+}
+
+$("soundBtn").addEventListener("click", () => {
+  soundOn = !soundOn;
+  $("soundBtn").textContent = soundOn ? "🔊 Suara ON" : "🔇 Suara OFF";
+  $("soundBtn").setAttribute("aria-pressed", String(soundOn));
+  if (soundOn) playTone(550);
+});
+
+$("exploreBtn").addEventListener("click", () => {
+  $("setup").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+$("islandGrid").addEventListener("click", e => {
+  const btn = e.target.closest("[data-island]");
+  if (!btn) return;
+  selectedIsland = btn.dataset.island;
+  document.querySelectorAll(".island").forEach(el =>
+    el.classList.toggle("selected", el === btn)
+  );
+  playTone(440);
+});
+
+$("modeRow").addEventListener("click", e => {
+  const btn = e.target.closest("[data-mode]");
+  if (!btn) return;
+  selectedMode = btn.dataset.mode;
+  document.querySelectorAll(".mode").forEach(el =>
+    el.classList.toggle("active", el === btn)
+  );
+  playTone(440);
+});
+
+function startGame() {
+  let pool = questions.filter(q =>
+    (selectedIsland === "all" || q.region === selectedIsland) &&
+    (selectedMode === "all" || q.type === selectedMode)
+  );
+
+  if (!pool.length) {
+    toast("Belum ada soal untuk pilihan ini.");
+    return;
+  }
+
+  round = shuffle(pool).slice(0, Math.min(10, pool.length));
+  current = 0;
+  score = 0;
+  lives = 3;
+  streak = 0;
+  correctTotal = 0;
+  xp = 0;
+
+  $("hero").style.display = "none";
+  $("setup").style.display = "none";
+  $("result").style.display = "none";
+  $("game").style.display = "block";
+
+  renderQuestion();
+  $("game").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function renderQuestion() {
+  if (current >= round.length || lives <= 0) {
+    finishGame();
+    return;
+  }
+
+  answered = false;
+  const q = round[current];
+
+  $("score").textContent = score;
+  $("lives").textContent = "❤️".repeat(lives) + "🖤".repeat(3 - lives);
+  $("streak").textContent = streak;
+  $("questionCount").textContent = `${current + 1}/${round.length}`;
+  $("progress").style.width = `${current / round.length * 100}%`;
+  $("category").textContent = q.type === "flora" ? "🌿 FLORA" : "🐾 FAUNA";
+  $("region").textContent = "📍 " + q.region;
+  $("questionEmoji").textContent = q.emoji;
+  $("questionText").textContent = q.q;
+  $("feedback").className = "feedback";
+  $("nextBtn").style.display = "none";
+  $("answers").innerHTML = "";
+
+  const options = q.a.map((text, index) => ({
+    text, correct: index === q.correct
+  }));
+  const shuffledOptions = shuffle(options);
+
+  shuffledOptions.forEach((option, index) => {
+    const btn = document.createElement("button");
+    btn.className = "answer";
+
+    const letter = document.createElement("span");
+    letter.className = "answer-letter";
+    letter.textContent = String.fromCharCode(65 + index);
+
+    const label = document.createElement("span");
+    label.textContent = option.text;
+
+    btn.append(letter, label);
+    btn.addEventListener("click", () => selectAnswer(btn, option, q));
+    $("answers").appendChild(btn);
+  });
+}
+
+function selectAnswer(btn, option, q) {
+  if (answered) return;
+  answered = true;
+
+  const buttons = [...$("answers").querySelectorAll(".answer")];
+  buttons.forEach(b => b.disabled = true);
+
+  const right = buttons.find(b =>
+    b.lastElementChild.textContent === q.a[q.correct]
+  );
+
+  if (right) right.classList.add("correct");
+
+  if (option.correct) {
+    streak++;
+    correctTotal++;
+    const gained = 100 + Math.min(streak - 1, 5) * 20;
+    score += gained;
+    xp += 10 + Math.min(streak - 1, 5) * 2;
+    btn.classList.add("correct");
+    $("feedback").className = "feedback show good";
+    $("feedbackTitle").textContent = ["🌟 Hebat!", "🎉 Jawaban benar!", "✨ Luar biasa!"][Math.floor(Math.random() * 3)];
+    $("pointsEarned").textContent = `+${gained} poin · +${10 + Math.min(streak - 1, 5) * 2} XP`;
+    playTone(660, .12);
+    setTimeout(() => playTone(880, .15), 100);
+  } else {
+    lives--;
+    streak = 0;
+    btn.classList.add("wrong");
+    $("feedback").className = "feedback show bad";
+    $("feedbackTitle").textContent = "🌱 Belum tepat, tetap semangat!";
+    $("pointsEarned").textContent = "Nyawa -1";
+    playTone(190, .22, "triangle");
+  }
+
+  $("feedbackText").textContent =
+    (option.correct ? "Benar! " : `Jawaban yang benar: ${q.a[q.correct]}. `) + q.fact;
+
+  $("score").textContent = score;
+  $("lives").textContent = "❤️".repeat(lives) + "🖤".repeat(3 - lives);
+  $("streak").textContent = streak;
+  $("progress").style.width = `${(current + 1) / round.length * 100}%`;
+  $("nextBtn").textContent =
+    (current === round.length - 1 || lives <= 0) ? "Lihat Hasil →" : "Lanjut →";
+  $("nextBtn").style.display = "inline-block";
+}
+
+$("nextBtn").addEventListener("click", () => {
+  current++;
+  renderQuestion();
+});
+
+function finishGame() {
+  $("game").style.display = "none";
+  $("result").style.display = "block";
+
+  if (score > bestScore) {
+    bestScore = score;
+    try { localStorage.setItem("jelajahBest", String(bestScore)); } catch (_) {}
+  }
+
+  const accuracy = round.length ? Math.round(correctTotal / round.length * 100) : 0;
+
+  $("resultEmoji").textContent =
+    accuracy >= 80 ? "🏆" : accuracy >= 50 ? "🌿" : "🌱";
+  $("resultTitle").textContent =
+    accuracy >= 80 ? "Penjaga Nusantara!" :
+    accuracy >= 50 ? "Penjelajah Hebat!" : "Terus Bertumbuh!";
+  $("resultMessage").textContent =
+    accuracy >= 80
+      ? "Luar biasa! Pengetahuanmu tentang alam Indonesia sangat mengesankan. Terus sebarkan semangat konservasi!"
+      : accuracy >= 50
+      ? "Kerja bagus! Kamu sudah mengenal banyak kekayaan alam. Coba lagi untuk meningkatkan skor dan pengetahuanmu."
+      : "Setiap petualangan adalah kesempatan belajar. Baca fakta pada setiap soal, lalu coba lagi!";
+  $("finalScore").textContent = score;
+  $("correctCount").textContent = `${correctTotal}/${round.length}`;
+  $("xpCount").textContent = xp;
+  $("bestScore").textContent = bestScore;
+  $("result").scrollIntoView({ behavior: "smooth", block: "center" });
+  playTone(accuracy >= 50 ? 660 : 330, .3);
+}
+
+function backHome() {
+  $("game").style.display = "none";
+  $("result").style.display = "none";
+  $("hero").style.display = "grid";
+  $("setup").style.display = "block";
+  $("hero").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+$("startBtn").addEventListener("click", startGame);
+$("replayBtn").addEventListener("click", startGame);
+$("homeBtn").addEventListener("click", backHome);
+
+$("quitBtn").addEventListener("click", () => {
+  if (confirm("Keluar dari permainan? Progres sesi ini akan diakhiri.")) {
+    backHome();
+  }
+});
+</script>
+</body>
+</html>
